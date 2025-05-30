@@ -19,8 +19,10 @@ public class SelectedSet : MonoBehaviour
     private float c;
     private float Parmor;
     private float Barmor;
+    private List<GameObject> toBeDestorySet = new List<GameObject>();
+    private int drawCards = 0;
 
-   
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,17 +49,28 @@ public class SelectedSet : MonoBehaviour
             //modify horizontal list (global)
             cardHolder.GetComponent<HorizontalCardHolder>().cards.Remove(card.GetComponentInChildren<Card>());
             Destroy(card);
+            //cardHolder.GetComponent<HorizontalCardHolder>().UpdatedCount();
         }
         selectedSet.Clear();
-        
+        //cardHolder.GetComponent<HorizontalCardHolder>().UpdatedCount();
+
+
     }
     public void Attack()
     {
+        foreach (GameObject card in selectedSet)
+        {
+            
+            toBeDestorySet.Add(card);
+
+        }
+
+        MoveCardToDiscard();
         //blood decrease;
         c = float.Parse(currentHealth.text);
         Barmor = float.Parse(bossArmorHealth.text);
         int attackSum = 0;
-        foreach (GameObject card in selectedSet)
+        foreach (GameObject card in toBeDestorySet)
         {
             //let card active it's effect
             attackSum+= CardEffect(card.GetComponent<CardAttrbute>().type, card.GetComponent<CardAttrbute>().points + 1);
@@ -79,12 +92,14 @@ public class SelectedSet : MonoBehaviour
         }
         
 
-
-        MoveCardToDiscard();
+        toBeDestorySet.Clear();
+        //MoveCardToDiscard();
+        DrawCards();
     }
 
     public int Defend()
     {
+
         Parmor = float.Parse(playerHealth.text);
         int defendSum = 0;
         foreach (GameObject card in selectedSet)
@@ -118,11 +133,15 @@ public class SelectedSet : MonoBehaviour
                 discardSet.GetComponent<CardDeckBase>().recoveryDeck(point);
                 break;
             case 2:
+                /*
                 for (int i = 0; i < point; i++)
                 {
                     cardHolder.GetComponent<HorizontalCardHolder>().AddCardToHand();
+                    //Debug.Log(1);
                     
                 }
+                */
+                drawCards += point;
                 break;
             case 3:
                 attack *= 2;
@@ -130,6 +149,17 @@ public class SelectedSet : MonoBehaviour
             default: break;  
         }
         return attack;
+    }
+
+    public void DrawCards()
+    {
+        //cardHolder.GetComponent<HorizontalCardHolder>().UpdatedCount();
+        for (int i = 0; i < drawCards; i++)
+        {
+          cardHolder.GetComponent<HorizontalCardHolder>().AddCardToHand();  
+        }
+        
+        drawCards = 0;
     }
    
 }

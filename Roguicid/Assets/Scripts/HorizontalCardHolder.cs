@@ -116,11 +116,17 @@ public class HorizontalCardHolder : MonoBehaviour
 
     }
 
+    public void UpdatedCount()
+    {
+        
+    }
 
     public void AddCardToHand()
     {
+        cards = GetComponentsInChildren<Card>().ToList();
+        //UpdatedCount();
         //Debug.Log(cards.Count);
-        if((cards.Count)>handLimit){
+        if ((cards.Count)>=handLimit){
             return;
         }
         AddCardProcess();
@@ -129,7 +135,17 @@ public class HorizontalCardHolder : MonoBehaviour
     {
         
         CardDeckBase cdb = deckBase.GetComponent<CardDeckBase>();
-        int number = cdb.GetCardNo();
+        int number = 0;
+        try
+        {
+            number = cdb.GetCardNo();
+        }
+        catch (Exception e)
+        {
+            //cards = GetComponentsInChildren<Card>().ToList();
+            return;
+        }
+        
         
 
         GameObject obj = Instantiate(slotPrefab, transform);
@@ -165,7 +181,7 @@ public class HorizontalCardHolder : MonoBehaviour
         image = cdb.GetCardImage(number);
         cards[cards.Count - 1].image = image;
         
-
+        
         StartCoroutine(Frame());
 
         

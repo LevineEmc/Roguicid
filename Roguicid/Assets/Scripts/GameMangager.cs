@@ -11,6 +11,7 @@ public class GameMangager : MonoBehaviour
     public GameObject buffPanel;
     public GameObject bossCounter;
     public GameObject reason;
+    //public GameObject BuffMenu;
 
     // Start is called before the first frame update
     //buttons
@@ -139,9 +140,11 @@ public class GameMangager : MonoBehaviour
             //defeated counter
             defeated++;
             NextBoss();
-            
-            bossMaxBloodBar.GetComponent<TMP_Text>().text = 20.ToString();
-            bossCurrentHealth.GetComponent<TMP_Text>().text = 20.ToString();
+            //modify next boss
+
+            bossMaxBloodBar.GetComponent<TMP_Text>().text = bossHealth.ToString();
+            bossCurrentHealth.GetComponent<TMP_Text>().text = bossHealth.ToString();
+            bossAttackValue.text = bossAttack.ToString();
             //next boss stage
             status = 0;
             return;
@@ -157,7 +160,7 @@ public class GameMangager : MonoBehaviour
     public void BossAttack() 
     {
 
-        bossAttack = 10;
+        //bossAttack = 10;
         report.AddLine("Boss will attack " + bossAttack.ToString() + " this turn");
     }
 
@@ -190,7 +193,6 @@ public class GameMangager : MonoBehaviour
         
         if(status ==3)
         status = (status + 1) % 4;
-        
 
         
     }
@@ -211,9 +213,12 @@ public class GameMangager : MonoBehaviour
             report.AddLine("You Win");
             EndGame("Congratulations");
         }
-        
-        
-        
+
+        bossHealth += 10;
+        bossAttack += 5;
+
+        //buff choose
+        buffPanel.SetActive(true);
     }
 
     public void EndGame(string s)

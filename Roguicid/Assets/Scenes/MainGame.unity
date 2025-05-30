@@ -477,8 +477,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0015297, y: 40.763}
-  m_SizeDelta: {x: 252.47, y: 314.34}
+  m_AnchoredPosition: {x: 0.0000038146973, y: -12.5}
+  m_SizeDelta: {x: 187.69, y: 207.81}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &44015475
 MonoBehaviour:
@@ -500,7 +500,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 432de548431e2594083f3867a0f2d711, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1a85f942e60b50b4b81324ea44e7fa72, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2538,7 +2538,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Obtain 5 Armor
+  m_text: Obtain 10 Armor
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2698,7 +2698,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 501389418}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1104839817}
+        m_TargetAssemblyTypeName: BuffSelection, Assembly-CSharp
+        m_MethodName: EnhanceLimit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &501389418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5188,7 +5200,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1104297664}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1104839817}
+        m_TargetAssemblyTypeName: BuffSelection, Assembly-CSharp
+        m_MethodName: DrawCards
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1104297664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5238,6 +5262,7 @@ GameObject:
   - component: {fileID: 1104839814}
   - component: {fileID: 1104839816}
   - component: {fileID: 1104839815}
+  - component: {fileID: 1104839817}
   m_Layer: 5
   m_Name: BuffChoose
   m_TagString: Untagged
@@ -5305,6 +5330,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1104839813}
   m_CullTransparentMesh: 1
+--- !u!114 &1104839817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104839813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c5964b6314344d4d83ee27f820e5344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardHolder: {fileID: 667881464}
+  armor: {fileID: 1641746986}
 --- !u!1 &1191535380
 GameObject:
   m_ObjectHideFlags: 0
@@ -6145,8 +6184,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00075722, y: 42.73}
-  m_SizeDelta: {x: 252.47, y: 310.4}
+  m_AnchoredPosition: {x: -12, y: 22}
+  m_SizeDelta: {x: 252.47, y: 216.82}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1301637810
 MonoBehaviour:
@@ -6220,8 +6259,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0014763, y: 42.26}
-  m_SizeDelta: {x: 252.47, y: 311.34}
+  m_AnchoredPosition: {x: 0.0000085831, y: 0.0000019073}
+  m_SizeDelta: {x: 177.61, y: 194.73}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1339277724
 MonoBehaviour:
@@ -6243,7 +6282,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a645499deac5944f593fdcd569acc1e7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f7cb881974fa0a846a89abc8235c24d0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7822,7 +7861,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1626743962}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1104839817}
+        m_TargetAssemblyTypeName: BuffSelection, Assembly-CSharp
+        m_MethodName: GainArmor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1626743962
 MonoBehaviour:
   m_ObjectHideFlags: 0
