@@ -94,7 +94,7 @@ public class SelectedSet : MonoBehaviour
 
         toBeDestorySet.Clear();
         //MoveCardToDiscard();
-        DrawCards();
+        //DrawCards();
     }
 
     public int Defend()
@@ -133,14 +133,14 @@ public class SelectedSet : MonoBehaviour
                 discardSet.GetComponent<CardDeckBase>().recoveryDeck(point);
                 break;
             case 2:
-                /*
+                
                 for (int i = 0; i < point; i++)
                 {
-                    cardHolder.GetComponent<HorizontalCardHolder>().AddCardToHand();
+                    //cardHolder.GetComponent<HorizontalCardHolder>().AddCardToHand();
                     //Debug.Log(1);
-                    
+                    DrawCardsController.IncreaseChanges();
                 }
-                */
+                
                 drawCards += point;
                 break;
             case 3:

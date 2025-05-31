@@ -28,7 +28,7 @@ public class BuffSelection : MonoBehaviour
     }
     public void DrawCards()
     {
-        for (int i = 0; i < deckHandler.handLimit; i++)
+        for (int i = 0; i < 5; i++)
         {
             deckHandler.AddCardToHand();
         }
@@ -38,6 +38,7 @@ public class BuffSelection : MonoBehaviour
     public void EnhanceLimit()
     {
         deckHandler.handLimit++;
+        DrawCardsController.limit++;
         CloseChooseMenu();
     }
     public void CloseChooseMenu() 

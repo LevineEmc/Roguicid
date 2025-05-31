@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+
 public class GameMangager : MonoBehaviour
 {
     //panel
@@ -50,6 +51,11 @@ public class GameMangager : MonoBehaviour
     public int bossAttack = 5;
     public int bossHealth = 10;
     private int defeated = 0;
+    private int extraAttack = 0;
+    private bool BossDefendAction = false;
+    private bool BossMagicAction = false;
+
+    //private HorizontalCardHolder deckHandlerScript;
     //private bool init = false;
 
     void Start()
@@ -75,7 +81,8 @@ public class GameMangager : MonoBehaviour
         // initial base
         deck.GetComponent<CardDeckBase>().InitialBase();
         bossDeck.GetComponent<CardDeckBase>().InitialBoss();
-        for(int i = 0;i<8;i++)
+        //deckHandlerScript = deckHandler.GetComponent<HorizontalCardHolder>();
+        for (int i = 0;i<8;i++)
         deckHandler.GetComponent<HorizontalCardHolder>().AddCardToHand();
         report.AddLine("8 cards added");
         bossHandler.GetComponent<HorizontalCardHolder>().AddCardBoss();
@@ -91,7 +98,7 @@ public class GameMangager : MonoBehaviour
             case 0:
 
                 attackButton.SetActive(true);
-                if (deckHandler.transform.childCount == 0)
+                if (deckHandler.transform.childCount == 0 && !buffPanel.activeSelf)
                 {
                     EndGame("You Don't Have Any Cards Left");
                 }
@@ -108,8 +115,20 @@ public class GameMangager : MonoBehaviour
             case 3:
                 if(defendButton.activeSelf)
                     defendButton.SetActive(false);
-
-                CounterCheck();
+                if (!BossDefendAction && !BossMagicAction)
+                {
+                    CounterCheck();
+                    extraAttack = 0;
+                }else if (BossDefendAction)
+                {
+                    BossGainArmor();
+                    BossDefendAction = false;
+                }else if (BossMagicAction)
+                {
+                    BossDoubleValue();
+                    //BossMagicAction = false;
+                }
+                
                // init = true;
                 return;
             
@@ -151,7 +170,43 @@ public class GameMangager : MonoBehaviour
         }
         else
         {
-            BossAttack();
+            float bossStatus = float.Parse(bossCurrentHealth.GetComponent<TMP_Text>().text) / float.Parse(bossMaxHealth.GetComponent<TMP_Text>().text);
+            Debug.Log(bossStatus);
+            if (bossStatus > 0.5)
+            {
+                BossAttack();
+            }else if (bossStatus < 0.5) 
+            {
+                System.Random rd = new System.Random();
+
+                int i = (rd.Next())%3;
+                switch (i)
+                {
+
+                    case 0:
+                        BossAttack();
+                        break;
+                    case 1:
+                        BossDefend();
+                        break; 
+                    case 2:
+                        if (BossMagicAction)
+                        {
+                            BossMagicAction = false;
+                            BossAttack();
+                        }
+                        else
+                        {
+                            BossMagic();
+                        }
+                        
+                        break;
+                   default: break;
+                }
+
+            }
+            
+
         }
         if(status == 1)
         status = (status + 1) % 4;
@@ -161,8 +216,26 @@ public class GameMangager : MonoBehaviour
     {
 
         //bossAttack = 10;
-        report.AddLine("Boss will attack " + bossAttack.ToString() + " this turn");
+        report.AddLine("Boss will attack " + (bossAttack+extraAttack).ToString() + " this turn");
     }
+    public void BossDefend()
+    {
+
+        //bossAttack = 10;
+        report.AddLine("Boss will gain " + bossAttack.ToString() + " armors this turn");
+        BossDefendAction = true;
+    }
+
+    public void BossMagic()
+    {
+
+        //bossAttack = 10;
+      
+        report.AddLine("The boss used power storage, doubling his attack power in the next round");
+        BossMagicAction = true;
+        
+    }
+
 
     public void Defend()
     {
@@ -182,7 +255,7 @@ public class GameMangager : MonoBehaviour
     {
 
         int result = int.Parse(playerHealth.text);
-        result -=bossAttack;
+        result -=(bossAttack+extraAttack);
         playerHealth.text = result.ToString();
         if (result < 0)
         {
@@ -197,7 +270,27 @@ public class GameMangager : MonoBehaviour
         
     }
 
-    
+    public void BossGainArmor()
+    {
+
+        int current = int.Parse(bossArmorHealth.text);
+        current += bossAttack;
+        bossArmorHealth.text = current.ToString();
+        if (status == 3)
+            status = (status + 1) % 4;
+
+
+    }
+    public void BossDoubleValue()
+    {
+
+        extraAttack = bossAttack;
+        if (status == 3)
+            status = (status + 1) % 4;
+
+
+    }
+
 
     public void NextBoss()
     {
@@ -213,12 +306,14 @@ public class GameMangager : MonoBehaviour
             report.AddLine("You Win");
             EndGame("Congratulations");
         }
-
-        bossHealth += 10;
-        bossAttack += 5;
-
+        
+        bossHealth += 5;
+        bossAttack += 3;
+        extraAttack = 0;
+        
         //buff choose
         buffPanel.SetActive(true);
+        //deckHandlerScript.AddCardToHand();
     }
 
     public void EndGame(string s)
