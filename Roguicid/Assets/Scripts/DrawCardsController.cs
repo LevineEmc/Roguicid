@@ -17,8 +17,11 @@ public class DrawCardsController : MonoBehaviour
 
     void Start()
     {
+        changes = 0;
+        limit = 8;
         limitNumber = limitBar.GetComponent<TMP_Text>();
         changeNumber = changesBar.GetComponent<TMP_Text>();
+        changeNumber.text = 0.ToString(); 
     }
 
     // Update is called once per frame

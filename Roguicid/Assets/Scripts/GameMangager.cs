@@ -54,7 +54,7 @@ public class GameMangager : MonoBehaviour
     private int extraAttack = 0;
     private bool BossDefendAction = false;
     private bool BossMagicAction = false;
-
+    public GameObject addButton;
     //private HorizontalCardHolder deckHandlerScript;
     //private bool init = false;
 
@@ -98,7 +98,7 @@ public class GameMangager : MonoBehaviour
             case 0:
 
                 attackButton.SetActive(true);
-                if (deckHandler.transform.childCount == 0 && !buffPanel.activeSelf)
+                if (deckHandler.transform.childCount == 0 && !buffPanel.activeSelf&&!addButton.activeSelf)
                 {
                     EndGame("You Don't Have Any Cards Left");
                 }
@@ -184,6 +184,7 @@ public class GameMangager : MonoBehaviour
                 {
 
                     case 0:
+                        BossMagicAction = false;
                         BossAttack();
                         break;
                     case 1:
@@ -307,10 +308,13 @@ public class GameMangager : MonoBehaviour
             EndGame("Congratulations");
         }
         
-        bossHealth += 5;
-        bossAttack += 3;
+        bossHealth += 10;
+        bossAttack += 5;
         extraAttack = 0;
-        
+
+        BossDefendAction = false;
+        BossMagicAction = false;
+
         //buff choose
         buffPanel.SetActive(true);
         //deckHandlerScript.AddCardToHand();
