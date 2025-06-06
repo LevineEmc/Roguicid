@@ -307,9 +307,18 @@ public class GameMangager : MonoBehaviour
             report.AddLine("You Win");
             EndGame("Congratulations");
         }
-        
-        bossHealth += 10;
-        bossAttack += 5;
+
+        if (bossHandler.transform.childCount <= 6)
+        {
+            bossHealth += 15;
+            bossAttack += 5;
+        }
+        else
+        {
+            bossHealth += 25;
+            bossAttack += 10;
+
+        }
         extraAttack = 0;
 
         BossDefendAction = false;
