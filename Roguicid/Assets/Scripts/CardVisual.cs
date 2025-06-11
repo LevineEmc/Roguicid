@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using Unity.Collections;
 using UnityEngine.UI;
 using Unity.VisualScripting;
-
+//This class is directly used from the GitHub repository and is not my original creation
 public class CardVisual : MonoBehaviour
 {
     private bool initalize = false;
